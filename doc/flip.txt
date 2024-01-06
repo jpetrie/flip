@@ -1,0 +1,56 @@
+*flip.txt*                           Quick navigation between file counterparts.
+==============================================================================
+
+INTRODUCTION
+Flip enables quick navigation between counterparts of the current file.
+
+
+CONFIGURATION                                                     *flip.options*
+Flip supports the following options:
+
+                                                            *flip.options.paths*
+    paths: ~
+        A list of paths to search for potential counterparts. Non-absolute
+        paths are considered relative to the directory containing the current
+        file. Flip will always search the directory of the current file in
+        addition to any directories specified here.
+
+        The default value is an empty list.
+
+                                                     *flip.options.include_path*
+    include_path: ~
+        Controls whether Flip includes the directories in |path| in its search
+        paths. If |path| has already been configured, this may be more
+        convenient than duplicating that work to set up |flip.options.paths|.
+
+        The default value is false.
+
+                                                  *flip.options.include_buffers*
+    include_buffers: ~
+        Controls whether Flip includes buffers in the counterpart search.
+        If true, loaded buffers that haven't yet been written to disk (except
+        "nofile" buffers) are included.
+
+        The default value is true.
+
+
+COMMANDS                                                         *flip.commands*
+Flip provides the following commands:
+
+:FlipNext {cmd}                                                      *:FlipNext*
+    Flips to the next counterpart of the current file.
+
+:FlipPrevious {cmd}                                              *:FlipPrevious*
+    Flips to the prior counterpart of the current file.
+
+Flip will attempt to locate an existing window showing the target file and
+switch to that window. If no such window exists, Flip will open the
+counterpart by invoking {cmd} followed by the full path to the file. This
+allows you to control whether the file is opened in a split, for
+example: >
+  :FlipNext botright vsplit
+The above will open the next counterpart in a vertical split to the right
+of the current window.
+
+If {cmd} is not specified, Flip will use |:edit|.
+
