@@ -59,11 +59,22 @@ local function get_counterparts(filename)
 
   if flip.options.include_path then
     for _, path in ipairs(vim.opt.path:get()) do
-      if #path > 0 then
-        table.insert(paths, path)
+      if #path == 0 then
+        -- An empty value in the path option (e.g., ",,") means "the current directory." If that happened to be the last
+        -- entry in the option, this loop will see it twice, but that's okay since the search paths are deduplicated
+        -- before they are used.
+        table.insert(paths, vim.loop.cwd())
+      elseif #path > 0 and path ~= "." then
+        -- "." in the path option means "directory of the current file," which Flip automatically inserts.
+        -- Because the paths are turned into absolute paths to ensure that files are deduplicated correctly, including
+        -- the "." entry here would actually resolve to searching the current directory, which isn't the same thing.
+        table.insert(paths, vim.fn.fnamemodify(path, ":p"))
       end
     end
   end
+
+  -- Remove any duplicates to reduce redundant searches.
+  paths = deduplicate(paths)
 
   -- Collapse the search paths into a string, separating each with a comma, for globpath().
   paths = vim.fn.join(paths, ",")
