@@ -3,8 +3,19 @@ local flip = {
     paths = {},
     include_path = false,
     include_buffers = true,
+    exclude_patterns = {},
   }
 }
+
+local function is_counterpart_included(filename)
+  for _, pattern in ipairs(flip.options.exclude_patterns) do
+    if string.match(filename, pattern) ~= nil then
+      return false
+    end
+  end
+
+  return true
+end
 
 local function deduplicate(list)
   local set = {}
@@ -81,6 +92,7 @@ local function get_counterparts(filename)
   end
 
   results = deduplicate(results)
+  results = vim.tbl_filter(is_counterpart_included, results)
   return results
 end
 

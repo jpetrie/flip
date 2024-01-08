@@ -10,28 +10,39 @@ Flip supports the following options:
 
                                                             *flip.options.paths*
     paths: ~
-        A list of paths to search for potential counterparts. Non-absolute
-        paths are considered relative to the directory containing the current
-        file. Flip will always search the directory of the current file in
-        addition to any directories specified here.
+      A list of paths to search for potential counterparts. Non-absolute paths
+      are considered relative to the directory containing the current file.
+      Flip will always search the directory of the current file in addition to
+      any directories specified here.
 
-        The default value is an empty list.
+      The default value is an empty list.
 
                                                      *flip.options.include_path*
     include_path: ~
-        Controls whether Flip includes the directories in |path| in its search
-        paths. If |path| has already been configured, this may be more
-        convenient than duplicating that work to set up |flip.options.paths|.
+      Controls whether Flip includes the directories in |path| in its search
+      paths. If |path| has already been configured, this may be more
+      convenient than duplicating that work to set up |flip.options.paths|.
 
-        The default value is false.
+      The default value is false.
 
                                                   *flip.options.include_buffers*
     include_buffers: ~
-        Controls whether Flip includes buffers in the counterpart search.
-        If true, loaded buffers that haven't yet been written to disk (except
-        "nofile" buffers) are included.
+      Controls whether Flip includes buffers in the counterpart search. If
+      true, loaded buffers that haven't yet been written to disk (except
+      "nofile" buffers) are included.
 
-        The default value is true.
+      The default value is true.
+
+                                                 *flip.options.exclude_patterns*
+    exclude_patterns: ~
+      A set of regular expressions that define files that should always be
+      excluded from the counterpart set. Any file path that matches any of the
+      provided expressions will never be considered a counterpart.
+
+      |string.match()| is used to perform the matching; see |luaref-patterns|
+      for details on pattern syntax.
+
+      The default value is an empty list.
 
 
 COMMANDS                                                         *flip.commands*
