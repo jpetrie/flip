@@ -81,7 +81,6 @@ local function get_counterparts(filename)
 
   -- Locate all potential counterparts on disk.
   local root = get_root(vim.fn.fnamemodify(filename, ":t"))
-  vim.print(paths)
   local files = vim.fn.globpath(paths, root .. ".*", false, true)
   local results = {}
   for _, file in ipairs(files) do
