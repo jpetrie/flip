@@ -1,0 +1,44 @@
+*flip.txt*                           Quick navigation between file counterparts.
+==============================================================================
+INTRODUCTION
+Flip enables quick navigation between counterparts of the current file.
+
+------------------------------------------------------------------------------
+CONFIGURATION                                                     *flip.options*
+Flip supports the following options:
+                                                            *flip.options.paths*
+    paths: ~
+      A list of paths to search for potential counterparts. Non-absolute paths
+      are considered relative to the directory containing the current file.
+      Flip will always search the directory of the current file in addition to
+      any directories specified here.
+
+      The default value is an empty list.
+
+                                                 *flip.options.exclude_patterns*
+    exclude_patterns: ~
+      A set of regular expressions that define files that should always be
+      excluded from the counterpart set. Any file path that matches any of the
+      provided expressions will never be considered a counterpart.
+
+      |string.match()| is used to perform the matching; see |luaref-patterns|
+      for details on pattern syntax.
+
+      The default value is an empty list.
+
+------------------------------------------------------------------------------
+COMMANDS                                                         *flip.commands*
+`:Flip {command}`
+
+  command    action
+  -------    ------
+  next       Cycle to the next counterpart in the counterpart list.
+  prior      Cycle to the prior counterpart in the counterpart list.
+
+If {command} is not specified, Flip will assume `next`.
+
+Flip will try to switch to a window containing the counterpart first. If no
+window exists, Flip will open the counterpart file using the `:edit` command.
+
+==============================================================================
+vim:tw=78:ft=help:norl:
