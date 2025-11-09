@@ -29,3 +29,5 @@ Running the `:Flip next` command will move to the next file in the counterpart l
 previous file. Flip will first attempt to activate the window containing the counterpart, if it exists, and otherwise
 will open the file using `:edit`.
 
+See `:help flip.txt` for additional details and API documentation.
+
