@@ -40,5 +40,24 @@ If {command} is not specified, Flip will assume `next`.
 Flip will try to switch to a window containing the counterpart first. If no
 window exists, Flip will open the counterpart file using the `:edit` command.
 
+------------------------------------------------------------------------------
+API                                                                   *flip.api*
+Flip provides a simple Lua API in the "flip" module.
+
+                                                                  *flip.setup()*
+  setup(options) ~
+    Configures Flip's options; see |flip.options| for details.
+
+                                                           *flip.counterparts()*
+  counterparts(file) ~
+    Returns a list of the files in the counterpart set for `file`.
+
+    If `file` is nil or empty, the current buffer's file is assumed.
+
+                                                                   *flip.flip()*
+  flip(amount) ~
+    Flips by `amount` through the counterpart set. Negative values will flip
+    in reverse.
+
 ==============================================================================
 vim:tw=78:ft=help:norl:
