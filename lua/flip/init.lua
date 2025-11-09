@@ -51,6 +51,11 @@ M.counterparts = function(filename)
     filename = vim.api.nvim_buf_get_name(0)
   end
 
+  if #filename == 0 then
+    -- There are no counterparts for an empty file name.
+    return {}
+  end
+
   -- Prepare search paths.
   local base = vim.fn.fnamemodify(filename, ":p:h")
   local paths = {base}
