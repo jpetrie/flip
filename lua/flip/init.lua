@@ -46,9 +46,9 @@ local function get_root(filename)
   return result
 end
 
-local function get_counterparts(filename)
+M.counterparts = function(filename)
   if filename == nil or #filename == 0 then
-    return {}
+    filename = vim.api.nvim_buf_get_name(0)
   end
 
   -- Prepare search paths.
@@ -80,7 +80,7 @@ end
 
 M.flip = function(amount)
   local file = vim.api.nvim_buf_get_name(0)
-  local counterparts = get_counterparts(file)
+  local counterparts = M.counterparts(file)
 
   for index, counterpart in ipairs(counterparts) do
     if counterpart == file then
