@@ -46,6 +46,7 @@ local function get_root(filename)
   return result
 end
 
+--- @param filename string?
 M.counterparts = function(filename)
   if filename == nil or #filename == 0 then
     filename = vim.api.nvim_buf_get_name(0)
@@ -83,7 +84,10 @@ M.counterparts = function(filename)
   return results
 end
 
+--- @param amount number
 M.flip = function(amount)
+  vim.validate("amount", amount, "number")
+
   local file = vim.api.nvim_buf_get_name(0)
   local counterparts = M.counterparts(file)
 
@@ -107,7 +111,10 @@ M.flip = function(amount)
   vim.notify("No counterpart.")
 end
 
+--- @param options flip.Options
 M.setup = function(options)
+  vim.validate("options", options, "table")
+
   M.options = vim.tbl_extend("keep", options, M.options)
 end
 
